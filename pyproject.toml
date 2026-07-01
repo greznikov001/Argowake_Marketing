@@ -1,0 +1,14 @@
+[project]
+name = "argowake-marketing-agents"
+version = "0.1.0"
+description = "Multi-agent marketing starter for Argowake."
+requires-python = ">=3.11"
+dependencies = [
+  "openai-agents",
+]
+
+[project.scripts]
+argowake-marketing = "main:main"
+
+[tool.uv]
+dev-dependencies = []

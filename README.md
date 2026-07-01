@@ -1,6 +1,13 @@
 # Argowake Marketing Agents
 
-Minimal OpenAI Agents SDK starter for marketing Argowake with a small specialist team:
+Minimal OpenAI Agents SDK starter for marketing Argowake using the positioning on the current site:
+
+- Fractional IT leadership for small businesses
+- cost optimization
+- cybersecurity and compliance oversight
+- vendor and project management
+- workflow automation
+- AI guidance
 
 - strategy agent
 - copywriting agent
@@ -15,6 +22,24 @@ Given a short business brief, the workflow generates:
 - channel-specific copy
 - outbound email and DM sequences
 - a final QA pass for credibility and tone
+
+## Site-derived initial content
+
+The default brief and messaging are based on the public site copy at `argowake.com`, which emphasizes:
+
+- Campbell-based fractional IT leadership
+- 10–50 employee firms
+- cybersecurity and IT cost reviews
+- Microsoft 365 and Google Workspace security/migrations
+- vendor selection and systems oversight
+
+Common industries listed on the site:
+
+- retail
+- insurance
+- construction
+- public sector
+- financial services
 
 ## Run locally
 
