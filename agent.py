@@ -5,6 +5,14 @@ from dataclasses import dataclass
 from agents import Agent, Runner
 
 
+SITE_CONTEXT = (
+    "Argowake is a Campbell-based fractional IT leadership practice for small and mid-sized professional firms. "
+    "The public site emphasizes cost optimization, cybersecurity and compliance oversight, vendor and project management, "
+    "workflow automation, and practical AI guidance. It also highlights support for Microsoft 365 and Google Workspace security "
+    "and migrations, systems stability, and plain-language guidance for 10-50 employee businesses."
+)
+
+
 @dataclass(frozen=True)
 class MarketingBrief:
     service_name: str

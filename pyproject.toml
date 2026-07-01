@@ -5,6 +5,7 @@ description = "Multi-agent marketing starter for Argowake."
 requires-python = ">=3.11"
 dependencies = [
   "openai-agents",
+  "msal",
 ]
 
 [project.scripts]
