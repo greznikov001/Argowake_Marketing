@@ -1,0 +1,45 @@
+[
+  {
+    "company": "ARCpointlabs of Downtown San Jose",
+    "website": "https://www.arcpointlabs.com",
+    "description": "Testing/lab services business with regulated customer data and appointment workflows.",
+    "opportunity": "Compliance and workflow automation review",
+    "priority": "high",
+    "source": "San Jose Chamber directory"
+  },
+  {
+    "company": "Armando Gomez Consulting",
+    "website": null,
+    "contact_name": "Armando Gomez",
+    "contact_title": "Consultant",
+    "description": "Independent consulting practice. Good fit for cloud tooling, CRM, and security baseline.",
+    "opportunity": "Security and productivity stack review",
+    "priority": "high",
+    "source": "San Jose Chamber directory"
+  },
+  {
+    "company": "Ascent Financial Consulting, LLC",
+    "website": null,
+    "description": "Financial consulting firm. Strong fit for secure collaboration and document retention.",
+    "opportunity": "Secure collaboration review",
+    "priority": "high",
+    "source": "San Jose Chamber directory"
+  },
+  {
+    "company": "Aflac - Tonya York",
+    "website": "https://aflac.com",
+    "contact_name": "Tonya York",
+    "description": "Insurance sales/benefits practice. Strong fit for email security and client workflow automation.",
+    "opportunity": "Email security and automation review",
+    "priority": "high",
+    "source": "San Jose Chamber directory"
+  },
+  {
+    "company": "ACRE Investments, Inc.",
+    "website": "https://www.acreinvestments.com",
+    "description": "Real estate investment firm. Good fit for secure file sharing and vendor oversight.",
+    "opportunity": "Security and vendor management review",
+    "priority": "high",
+    "source": "San Jose Chamber directory"
+  }
+]

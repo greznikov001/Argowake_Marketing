@@ -45,3 +45,7 @@ The workflow should optimize for:
 - short, testable messaging
 - credible proof points
 - channel-appropriate format
+- a 60-minute daily operating loop
+- manager-led delegation with three parallel specialists
+- inbox replies and scheduled marketing activities as the daily trigger
+- an estimated monthly OpenAI budget guard that blocks over-cap runs

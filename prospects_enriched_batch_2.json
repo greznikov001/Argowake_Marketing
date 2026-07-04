@@ -1,0 +1,44 @@
+[
+  {
+    "company": "Advance Design Consultants, Inc.",
+    "website": "https://www.adcengineers.com",
+    "description": "Consulting/engineering firm. Strong fit for cybersecurity, collaboration, and project management support.",
+    "opportunity": "Cybersecurity and collaboration review",
+    "priority": "high",
+    "source": "San Jose Chamber directory"
+  },
+  {
+    "company": "Aedis Architects",
+    "website": "https://www.aedisarchitects.com",
+    "description": "Architecture firm focused on educational facilities. Good fit for document control, collaboration, and backup.",
+    "opportunity": "Microsoft 365 and document management review",
+    "priority": "high",
+    "source": "San Jose Chamber directory + official website"
+  },
+  {
+    "company": "Aldea Tax Services Inc",
+    "website": "https://www.aldeatax.com",
+    "description": "Accounting and tax services firm. Strong fit for security, compliance, and workflow automation.",
+    "opportunity": "Compliance and Microsoft 365 security review",
+    "priority": "high",
+    "source": "San Jose Chamber directory"
+  },
+  {
+    "company": "All Pro Repipes Inc",
+    "website": "https://1dayallprorepipes.com",
+    "description": "Home services contractor with likely mobile staff and scheduling workflows.",
+    "opportunity": "Workflow automation and backup review",
+    "priority": "medium",
+    "source": "San Jose Chamber directory"
+  },
+  {
+    "company": "All Solutions Insurance Agency, LLC",
+    "website": "https://www.allsolutionsinsurance.com",
+    "contact_name": "Seeta Bhandari",
+    "contact_title": "Agent/Owner",
+    "description": "Insurance agency with regulated data and client communication workflows.",
+    "opportunity": "Cybersecurity and client-data protection review",
+    "priority": "high",
+    "source": "San Jose Chamber directory + official website"
+  }
+]

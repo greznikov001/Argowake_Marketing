@@ -10,7 +10,12 @@ from email.header import decode_header
 from email.utils import parseaddr
 from typing import Iterable
 
+import structlog
+
 from oauth_tools import MsalTokenStore
+
+
+LOGGER = structlog.get_logger(__name__).bind(source="email_tools.py")
 
 
 @dataclass(frozen=True)
@@ -128,34 +133,40 @@ def _access_token(config: EmailConfig) -> str:
 
 
 def fetch_recent_messages(config: EmailConfig, limit: int = 10) -> list[EmailMessageSummary]:
-    config.validate_inbound()
-    summaries: list[EmailMessageSummary] = []
-    with imaplib.IMAP4_SSL(config.imap_host, config.imap_port) as mailbox:
-        access_token = _access_token(config)
-        mailbox.authenticate("XOAUTH2", lambda _: _xoauth2_raw(config.imap_username, access_token))
-        mailbox.select(config.mailbox)
-        status, data = mailbox.search(None, "ALL")
-        if status != "OK" or not data or not data[0]:
-            return []
-        message_ids = data[0].split()[-limit:]
-        for uid in message_ids:
-            status, message_data = mailbox.fetch(uid, "(RFC822)")
-            if status != "OK" or not message_data:
-                continue
-            raw_message = message_data[0][1]
-            parsed = message_from_bytes(raw_message)
-            body = _extract_text_body(parsed)
-            summaries.append(
-                EmailMessageSummary(
-                    uid=uid.decode("utf-8", errors="replace"),
-                    from_address=parseaddr(_decode_header_value(parsed.get("From")))[1] or _decode_header_value(parsed.get("From")),
-                    subject=_decode_header_value(parsed.get("Subject")),
-                    date=_decode_header_value(parsed.get("Date")),
-                    snippet=_truncate(body),
-                    body=body,
+    LOGGER.info("Fetching recent messages", limit=limit)
+    try:
+        config.validate_inbound()
+        summaries: list[EmailMessageSummary] = []
+        with imaplib.IMAP4_SSL(config.imap_host, config.imap_port) as mailbox:
+            access_token = _access_token(config)
+            mailbox.authenticate("XOAUTH2", lambda _: _xoauth2_raw(config.imap_username, access_token))
+            mailbox.select(config.mailbox)
+            status, data = mailbox.search(None, "ALL")
+            if status != "OK" or not data or not data[0]:
+                return []
+            message_ids = data[0].split()[-limit:]
+            for uid in message_ids:
+                status, message_data = mailbox.fetch(uid, "(RFC822)")
+                if status != "OK" or not message_data:
+                    continue
+                raw_message = message_data[0][1]
+                parsed = message_from_bytes(raw_message)
+                body = _extract_text_body(parsed)
+                summaries.append(
+                    EmailMessageSummary(
+                        uid=uid.decode("utf-8", errors="replace"),
+                        from_address=parseaddr(_decode_header_value(parsed.get("From")))[1] or _decode_header_value(parsed.get("From")),
+                        subject=_decode_header_value(parsed.get("Subject")),
+                        date=_decode_header_value(parsed.get("Date")),
+                        snippet=_truncate(body),
+                        body=body,
+                    )
                 )
-            )
-    return summaries
+        LOGGER.info("Fetched recent messages", count=len(summaries))
+        return summaries
+    except Exception:
+        LOGGER.exception("Fetch recent messages failed")
+        raise
 
 
 def build_reply_message(
@@ -178,21 +189,27 @@ def build_reply_message(
 
 
 def send_email(config: EmailConfig, message: EmailMessage) -> None:
-    config.validate_outbound()
-    access_token = _access_token(config)
-    with smtplib.SMTP(config.smtp_host, config.smtp_port, timeout=30) as client:
-        client.ehlo()
-        client.starttls()
-        client.ehlo()
-        import base64
+    LOGGER.info("Sending email", to=message.get("To", ""))
+    try:
+        config.validate_outbound()
+        access_token = _access_token(config)
+        with smtplib.SMTP(config.smtp_host, config.smtp_port, timeout=30) as client:
+            client.ehlo()
+            client.starttls()
+            client.ehlo()
+            import base64
 
-        auth_string = base64.b64encode(_xoauth2_raw(config.smtp_username, access_token)).decode("ascii")
-        code, response = client.docmd("AUTH", "XOAUTH2 " + auth_string)
-        if code not in (235, 250):
-            raise smtplib.SMTPAuthenticationError(code, response)
-        recipients = []
-        for header in ("To", "Cc", "Bcc"):
-            value = message.get(header, "")
-            if value:
-                recipients.extend(part.strip() for part in value.split(",") if part.strip())
-        client.send_message(message, from_addr=config.address, to_addrs=recipients or None)
+            auth_string = base64.b64encode(_xoauth2_raw(config.smtp_username, access_token)).decode("ascii")
+            code, response = client.docmd("AUTH", "XOAUTH2 " + auth_string)
+            if code not in (235, 250):
+                raise smtplib.SMTPAuthenticationError(code, response)
+            recipients = []
+            for header in ("To", "Cc", "Bcc"):
+                value = message.get(header, "")
+                if value:
+                    recipients.extend(part.strip() for part in value.split(",") if part.strip())
+            client.send_message(message, from_addr=config.address, to_addrs=recipients or None)
+            LOGGER.info("Email sent", recipients=len(recipients) or 1)
+    except Exception:
+        LOGGER.exception("Send email failed")
+        raise

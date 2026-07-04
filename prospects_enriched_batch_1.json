@@ -1,0 +1,44 @@
+[
+  {
+    "company": "3Nickels - Alice Village",
+    "website": "https://3nickels.com",
+    "contact_name": "Alice Village",
+    "contact_title": "Owner / Email contact",
+    "description": "Financial services firm. Good fit for IT leadership, Microsoft 365 security, and backup review.",
+    "opportunity": "IT cost and security review",
+    "priority": "high",
+    "source": "San Jose Chamber directory"
+  },
+  {
+    "company": "1-800-BOARDUP Of San Jose Metro",
+    "website": "https://1-800boardup.com",
+    "description": "Restoration provider with likely distributed field operations and phone-heavy workflows.",
+    "opportunity": "Backup, device management, and workflow review",
+    "priority": "medium",
+    "source": "San Jose Chamber directory"
+  },
+  {
+    "company": "2334 Lundy Place LLC",
+    "website": null,
+    "description": "Real estate/developer entity. Likely to have vendor, email, and document management needs.",
+    "opportunity": "IT governance and vendor oversight",
+    "priority": "medium",
+    "source": "San Jose Chamber directory"
+  },
+  {
+    "company": "408 Rental Management",
+    "website": null,
+    "description": "Property management organization. Good candidate for tenant communications, security, and process automation.",
+    "opportunity": "Workflow automation and Microsoft 365 review",
+    "priority": "high",
+    "source": "San Jose Chamber directory"
+  },
+  {
+    "company": "72 Degrees Cooper Brothers",
+    "website": "https://www.72degreescb.com",
+    "description": "Contractor/HVAC business with likely field staff and scheduling complexity.",
+    "opportunity": "Device, backup, and field workflow review",
+    "priority": "medium",
+    "source": "San Jose Chamber directory"
+  }
+]

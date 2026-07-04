@@ -6,6 +6,12 @@ requires-python = ">=3.11"
 dependencies = [
   "openai-agents",
   "msal",
+  "structlog",
+  "beautifulsoup4",
+  "extruct",
+  "phonenumbers",
+  "lxml",
+  "usaddress",
 ]
 
 [project.scripts]

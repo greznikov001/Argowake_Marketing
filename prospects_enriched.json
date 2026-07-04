@@ -1,0 +1,212 @@
+[
+  {
+    "company": "3Nickels - Alice Village",
+    "website": "https://3nickels.com",
+    "contact_name": "Alice Village",
+    "contact_title": "Owner / Email contact",
+    "description": "Financial services firm. Good fit for IT leadership, Microsoft 365 security, and backup review.",
+    "opportunity": "IT cost and security review",
+    "priority": "high",
+    "source": "San Jose Chamber directory"
+  },
+  {
+    "company": "1-800-BOARDUP Of San Jose Metro",
+    "website": "https://1-800boardup.com",
+    "description": "Restoration provider with likely distributed field operations and phone-heavy workflows.",
+    "opportunity": "Backup, device management, and workflow review",
+    "priority": "medium",
+    "source": "San Jose Chamber directory"
+  },
+  {
+    "company": "2334 Lundy Place LLC",
+    "website": null,
+    "description": "Real estate/developer entity. Likely to have vendor, email, and document management needs.",
+    "opportunity": "IT governance and vendor oversight",
+    "priority": "medium",
+    "source": "San Jose Chamber directory"
+  },
+  {
+    "company": "408 Rental Management",
+    "website": null,
+    "description": "Property management organization. Good candidate for tenant communications, security, and process automation.",
+    "opportunity": "Workflow automation and Microsoft 365 review",
+    "priority": "high",
+    "source": "San Jose Chamber directory"
+  },
+  {
+    "company": "72 Degrees Cooper Brothers",
+    "website": "https://www.72degreescb.com",
+    "description": "Contractor/HVAC business with likely field staff and scheduling complexity.",
+    "opportunity": "Device, backup, and field workflow review",
+    "priority": "medium",
+    "source": "San Jose Chamber directory"
+  },
+  {
+    "company": "Advance Design Consultants, Inc.",
+    "website": "https://www.adcengineers.com",
+    "description": "Consulting/engineering firm. Strong fit for cybersecurity, collaboration, and project management support.",
+    "opportunity": "Cybersecurity and collaboration review",
+    "priority": "high",
+    "source": "San Jose Chamber directory"
+  },
+  {
+    "company": "Aedis Architects",
+    "website": "https://www.aedisarchitects.com",
+    "description": "Architecture firm focused on educational facilities. Good fit for document control, collaboration, and backup.",
+    "opportunity": "Microsoft 365 and document management review",
+    "priority": "high",
+    "source": "San Jose Chamber directory + official website"
+  },
+  {
+    "company": "Aldea Tax Services Inc",
+    "website": "https://www.aldeatax.com",
+    "description": "Accounting and tax services firm. Strong fit for security, compliance, and workflow automation.",
+    "opportunity": "Compliance and Microsoft 365 security review",
+    "priority": "high",
+    "source": "San Jose Chamber directory"
+  },
+  {
+    "company": "All Pro Repipes Inc",
+    "website": "https://1dayallprorepipes.com",
+    "description": "Home services contractor with likely mobile staff and scheduling workflows.",
+    "opportunity": "Workflow automation and backup review",
+    "priority": "medium",
+    "source": "San Jose Chamber directory"
+  },
+  {
+    "company": "All Solutions Insurance Agency, LLC",
+    "website": "https://www.allsolutionsinsurance.com",
+    "contact_name": "Seeta Bhandari",
+    "contact_title": "Agent/Owner",
+    "description": "Insurance agency with regulated data and client communication workflows.",
+    "opportunity": "Cybersecurity and client-data protection review",
+    "priority": "high",
+    "source": "San Jose Chamber directory + official website"
+  },
+  {
+    "company": "Altus Business Solutions",
+    "website": null,
+    "description": "Business coaching/consulting firm. Likely to value systems, CRM, and automation support.",
+    "opportunity": "Process automation and CRM review",
+    "priority": "high",
+    "source": "San Jose Chamber directory"
+  },
+  {
+    "company": "Anago Commercial Cleaning",
+    "website": null,
+    "description": "Service business with dispatch, scheduling, and mobile workforce needs.",
+    "opportunity": "Dispatch workflow automation",
+    "priority": "medium",
+    "source": "San Jose Chamber directory"
+  },
+  {
+    "company": "Anthony Mansueto, CPA",
+    "website": null,
+    "contact_name": "Anthony Mansueto",
+    "contact_title": "CPA",
+    "description": "CPA practice. Strong fit for security, backup, and file-sharing hardening.",
+    "opportunity": "Security and compliance review",
+    "priority": "high",
+    "source": "San Jose Chamber directory"
+  },
+  {
+    "company": "Aqua Purification Systems, Inc.",
+    "website": "https://www.aquapurification.com",
+    "description": "Industrial/manufacturing-related business with likely technical documentation and support needs.",
+    "opportunity": "IT governance and backup review",
+    "priority": "medium",
+    "source": "San Jose Chamber directory"
+  },
+  {
+    "company": "ARC Electrical Services",
+    "website": null,
+    "description": "Electrical contractor with field operations and scheduling complexity.",
+    "opportunity": "Field workflow and device management review",
+    "priority": "medium",
+    "source": "San Jose Chamber directory"
+  },
+  {
+    "company": "ARCpointlabs of Downtown San Jose",
+    "website": "https://www.arcpointlabs.com",
+    "description": "Testing/lab services business with regulated customer data and appointment workflows.",
+    "opportunity": "Compliance and workflow automation review",
+    "priority": "high",
+    "source": "San Jose Chamber directory"
+  },
+  {
+    "company": "Armando Gomez Consulting",
+    "website": null,
+    "contact_name": "Armando Gomez",
+    "contact_title": "Consultant",
+    "description": "Independent consulting practice. Good fit for cloud tooling, CRM, and security baseline.",
+    "opportunity": "Security and productivity stack review",
+    "priority": "high",
+    "source": "San Jose Chamber directory"
+  },
+  {
+    "company": "Ascent Financial Consulting, LLC",
+    "website": null,
+    "description": "Financial consulting firm. Strong fit for secure collaboration and document retention.",
+    "opportunity": "Secure collaboration review",
+    "priority": "high",
+    "source": "San Jose Chamber directory"
+  },
+  {
+    "company": "Aflac - Tonya York",
+    "website": "https://aflac.com",
+    "contact_name": "Tonya York",
+    "description": "Insurance sales/benefits practice. Strong fit for email security and client workflow automation.",
+    "opportunity": "Email security and automation review",
+    "priority": "high",
+    "source": "San Jose Chamber directory"
+  },
+  {
+    "company": "ACRE Investments, Inc.",
+    "website": "https://www.acreinvestments.com",
+    "description": "Real estate investment firm. Good fit for secure file sharing and vendor oversight.",
+    "opportunity": "Security and vendor management review",
+    "priority": "high",
+    "source": "San Jose Chamber directory"
+  },
+  {
+    "company": "Baywell Advanced Systems, LLC",
+    "website": "https://www.baywell.net",
+    "description": "Managed IT services provider. Likely internal IT maturity and security review opportunity.",
+    "opportunity": "Executive cyber risk review",
+    "priority": "high",
+    "source": "San Jose Chamber directory + official website"
+  },
+  {
+    "company": "BC Networks, Inc.",
+    "website": "https://www.bcnetworks.com",
+    "description": "Managed IT security services provider. Good fit for co-managed services, AI readiness, and cybersecurity advisory.",
+    "opportunity": "Co-managed service partnership review",
+    "priority": "high",
+    "source": "San Jose Chamber directory + official website"
+  },
+  {
+    "company": "Black Swan Consulting Inc.",
+    "website": "https://consultblackswan.com",
+    "description": "Consulting firm with likely small-team operations and client data protection needs.",
+    "opportunity": "Security baseline and workflow review",
+    "priority": "high",
+    "source": "San Jose Chamber directory + official website"
+  },
+  {
+    "company": "BLR Visual Communications",
+    "website": "https://www.blrvisual.com",
+    "contact_name": "Kevin Griffin",
+    "description": "Advertising/signage company. Good fit for collaboration, storage, and workflow automation.",
+    "opportunity": "Workflow and file-sharing review",
+    "priority": "medium",
+    "source": "San Jose Chamber directory + official website"
+  },
+  {
+    "company": "Barnard & Associates Insurance",
+    "website": null,
+    "description": "Insurance and finance member with likely regulated data and client communication needs.",
+    "opportunity": "Security and compliance review",
+    "priority": "high",
+    "source": "San Jose Chamber directory"
+  }
+]

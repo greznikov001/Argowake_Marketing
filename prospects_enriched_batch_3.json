@@ -1,0 +1,44 @@
+[
+  {
+    "company": "Altus Business Solutions",
+    "website": null,
+    "description": "Business coaching/consulting firm. Likely to value systems, CRM, and automation support.",
+    "opportunity": "Process automation and CRM review",
+    "priority": "high",
+    "source": "San Jose Chamber directory"
+  },
+  {
+    "company": "Anago Commercial Cleaning",
+    "website": null,
+    "description": "Service business with dispatch, scheduling, and mobile workforce needs.",
+    "opportunity": "Dispatch workflow automation",
+    "priority": "medium",
+    "source": "San Jose Chamber directory"
+  },
+  {
+    "company": "Anthony Mansueto, CPA",
+    "website": null,
+    "contact_name": "Anthony Mansueto",
+    "contact_title": "CPA",
+    "description": "CPA practice. Strong fit for security, backup, and file-sharing hardening.",
+    "opportunity": "Security and compliance review",
+    "priority": "high",
+    "source": "San Jose Chamber directory"
+  },
+  {
+    "company": "Aqua Purification Systems, Inc.",
+    "website": "https://www.aquapurification.com",
+    "description": "Industrial/manufacturing-related business with likely technical documentation and support needs.",
+    "opportunity": "IT governance and backup review",
+    "priority": "medium",
+    "source": "San Jose Chamber directory"
+  },
+  {
+    "company": "ARC Electrical Services",
+    "website": null,
+    "description": "Electrical contractor with field operations and scheduling complexity.",
+    "opportunity": "Field workflow and device management review",
+    "priority": "medium",
+    "source": "San Jose Chamber directory"
+  }
+]
