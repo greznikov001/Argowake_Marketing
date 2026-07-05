@@ -12,6 +12,7 @@ dependencies = [
   "phonenumbers",
   "lxml",
   "usaddress",
+  "gliner2",
 ]
 
 [project.scripts]

@@ -36,7 +36,7 @@ except Exception:  # pragma: no cover
 LOGGER = structlog.get_logger(__name__).bind(source="web_tools.py")
 
 _CONTACT_LINK_RE = re.compile(
-    r"\b(contact|about|team|company|who-we-are|our-story|get in touch|reach out|connect|meet the team|our people|who we are|the team|contact us)\b",
+    r"\b(contact|about|team|company|who-we-are|our-story|get in touch|reach out|connect|meet the team|our people|who we are|the team|contact us|privacy-policy|privacy policy)\b",
     re.I,
 )
 _EMAIL_RE = re.compile(r"[\w.+-]+@[\w-]+(?:\.[\w-]+)+")
@@ -87,6 +87,7 @@ class ParsedPage:
     blocks: list[str] = field(default_factory=list)
     structured_data: list[dict[str, Any]] = field(default_factory=list)
     links: list[tuple[str, str]] = field(default_factory=list)
+    script_urls: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -268,9 +269,10 @@ def _fetch_page(url: str, timeout_seconds: int) -> ParsedPage | None:
 def _parse_html_page(url: str, html: str) -> ParsedPage:
     if BeautifulSoup is None:
         text = _normalize_whitespace(html)
-        return ParsedPage(url=url, text=text, blocks=[text] if text else [], structured_data=_extract_structured_data(html, url))
+        return ParsedPage(url=url, text=text, blocks=[text] if text else [], structured_data=_extract_structured_data(html, url), script_urls=_extract_script_urls(html, url))
 
     soup = BeautifulSoup(html, "html.parser")
+    script_urls = _extract_script_urls(html, url)
     for tag in soup(["script", "style", "noscript"]):
         if tag.name == "script" and tag.get("type", "").lower() == "application/ld+json":
             continue
@@ -299,7 +301,26 @@ def _parse_html_page(url: str, html: str) -> ParsedPage:
         blocks=blocks,
         structured_data=_extract_structured_data(html, url),
         links=links,
+        script_urls=script_urls,
     )
+
+
+def _extract_script_urls(html: str, url: str) -> list[str]:
+    urls: list[str] = []
+    if BeautifulSoup is None:
+        for match in re.finditer(r"""<script[^>]+src=["']([^"']+)["']""", html, re.I):
+            absolute = urljoin(url, match.group(1))
+            if absolute not in urls:
+                urls.append(absolute)
+        return urls
+    soup = BeautifulSoup(html, "html.parser")
+    for script in soup.find_all("script", src=True):
+        src = script.get("src")
+        if isinstance(src, str) and src.strip():
+            absolute = urljoin(url, src.strip())
+            if absolute not in urls:
+                urls.append(absolute)
+    return urls
 
 
 def _extract_structured_data(html: str, url: str) -> list[dict[str, Any]]:

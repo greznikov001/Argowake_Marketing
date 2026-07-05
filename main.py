@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import sys
 from pathlib import Path
@@ -25,6 +26,14 @@ from email_agent import draft_reply_with_site_context
 from email_tools import EmailConfig, build_reply_message, fetch_recent_messages, send_email
 from logging_setup import configure_logging, set_transaction_id
 from oauth_tools import MsalTokenStore
+from web_render import (
+    render_rendered_web_pages_json,
+    render_rendered_web_pages_text,
+    render_site_for_llm,
+    save_rendered_web_pages,
+)
+from web_gliner import extract_with_gliner, render_gliner_json, render_gliner_text, save_gliner_extraction
+from web_email import scrape_emails, render_email_scrape_json, render_email_scrape_text, save_email_scrape
 from web_tools import parse_website, render_website_parse_json, render_website_parse_result, save_website_parse_json
 
 
@@ -173,6 +182,33 @@ def build_parser() -> argparse.ArgumentParser:
     web_parse.add_argument("--website", required=True, help="Company website or bare domain.")
     web_parse.add_argument("--max-pages", type=int, default=3, help="Maximum pages to inspect.")
     web_parse.add_argument("--json", action="store_true", help="Return structured JSON output.")
+
+    web_render = web_subparsers.add_parser(
+        "render",
+        help="Render website pages to text plus an LLM-ready prompt without calling a model.",
+    )
+    web_render.add_argument("--website", required=True, help="Company website or bare domain.")
+    web_render.add_argument("--max-pages", type=int, default=3, help="Maximum pages to inspect.")
+    web_render.add_argument("--max-blocks", type=int, default=12, help="Maximum content blocks to keep per page.")
+    web_render.add_argument("--json", action="store_true", help="Return structured JSON output.")
+
+    web_gliner = web_subparsers.add_parser(
+        "gliner",
+        help="Render website pages and extract entities with a local GLiNER model.",
+    )
+    web_gliner.add_argument("--website", required=True, help="Company website or bare domain.")
+    web_gliner.add_argument("--max-pages", type=int, default=3, help="Maximum pages to inspect.")
+    web_gliner.add_argument("--max-blocks", type=int, default=12, help="Maximum content blocks to keep per page.")
+    web_gliner.add_argument("--json", action="store_true", help="Return structured JSON output.")
+
+    web_email = web_subparsers.add_parser(
+        "email",
+        help="Find email addresses on the homepage and contact/about pages.",
+    )
+    web_email.add_argument("--website", required=True, help="Company website or bare domain.")
+    web_email.add_argument("--max-pages", type=int, default=3, help="Maximum pages to inspect.")
+    web_email.add_argument("--json", action="store_true", help="Return structured JSON output.")
+    web_email.add_argument("--verbose", action="store_true", help="Print the full raw JSON extraction output.")
 
     budget = subparsers.add_parser("budget", help="Inspect the local OpenAI budget guard.")
     budget_subparsers = budget.add_subparsers(dest="budget_command")
@@ -481,6 +517,66 @@ def _run_web_parse(args: argparse.Namespace) -> int:
         return 1
 
 
+def _run_web_render(args: argparse.Namespace) -> int:
+    LOGGER.info("Starting web render", website=args.website, max_pages=args.max_pages)
+    try:
+        result = render_site_for_llm(args.website, max_pages=args.max_pages, max_blocks=args.max_blocks)
+        LOGGER.info("Completed web render", pages=len(result.discovered_pages))
+        output_file = save_rendered_web_pages(result)
+        LOGGER.info("Saved web render output", file=str(output_file))
+        if args.json:
+            print(render_rendered_web_pages_json(result))
+        else:
+            print(render_rendered_web_pages_text(result))
+        print(f"Saved JSON: {output_file}")
+        return 0
+    except Exception:
+        LOGGER.exception("Web render failed")
+        return 1
+
+
+def _run_web_gliner(args: argparse.Namespace) -> int:
+    LOGGER.info("Starting web gliner", website=args.website, max_pages=args.max_pages)
+    try:
+        result = extract_with_gliner(args.website, max_pages=args.max_pages, max_blocks=args.max_blocks)
+        LOGGER.info("Completed web gliner", pages=len(result.discovered_pages))
+        output_file = save_gliner_extraction(result)
+        LOGGER.info("Saved web gliner output", file=str(output_file))
+        if args.json:
+            print(render_gliner_json(result))
+        else:
+            print(render_gliner_text(result))
+        print(f"Saved JSON: {output_file}")
+        return 0
+    except Exception:
+        LOGGER.exception("Web gliner failed")
+        return 1
+
+
+def _run_web_email(args: argparse.Namespace) -> int:
+    LOGGER.info("Starting web email scrape", website=args.website, max_pages=args.max_pages)
+    try:
+        result = scrape_emails(args.website, max_pages=args.max_pages)
+        LOGGER.info("Completed web email scrape", pages=len(result.discovered_pages), emails=len(result.emails))
+        output_file = save_email_scrape(result)
+        LOGGER.info("Saved web email output", file=str(output_file))
+        if args.verbose:
+            print(json.dumps(result.full_json or json.loads(render_email_scrape_json(result)), indent=2, sort_keys=True))
+            if result.warnings:
+                print("Warnings:")
+                for warning in result.warnings:
+                    print(f"- {warning['tag']}: {warning['message']}")
+        elif args.json:
+            print(render_email_scrape_json(result))
+        else:
+            print(render_email_scrape_text(result))
+        print(f"Saved JSON: {output_file}")
+        return 0
+    except Exception:
+        LOGGER.exception("Web email scrape failed")
+        return 1
+
+
 def main() -> int:
     _load_env_file()
     configure_logging()
@@ -547,7 +643,19 @@ def main() -> int:
             exit_code = _run_web_parse(args)
             LOGGER.info("Command end", exit_code=exit_code)
             return exit_code
-        parser.error("web requires a subcommand: parse")
+        if args.web_command == "render":
+            exit_code = _run_web_render(args)
+            LOGGER.info("Command end", exit_code=exit_code)
+            return exit_code
+        if args.web_command == "gliner":
+            exit_code = _run_web_gliner(args)
+            LOGGER.info("Command end", exit_code=exit_code)
+            return exit_code
+        if args.web_command == "email":
+            exit_code = _run_web_email(args)
+            LOGGER.info("Command end", exit_code=exit_code)
+            return exit_code
+        parser.error("web requires a subcommand: parse, render, gliner, or email")
     parser.error("Unknown command")
     return 2
 
